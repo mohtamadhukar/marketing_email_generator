@@ -1,0 +1,147 @@
+{
+    "campaign_brief": {
+        "brand": "HEB",
+        "campaign": {
+            "name": "Holiday Fresh Savings",
+            "goal": "Re-engage lapsed shoppers before the holiday season",
+            "objective": "Increase online grocery orders by 15% in November",
+            "start_date": "2025-11-20",
+            "end_date": "2025-12-15"
+        },
+        "audience": {
+            "segment": "lapsed_customers_30d",
+            "persona": "Budget-conscious family shopper",
+            "locale": "en-US",
+            "preferred_store": "San Antonio #104",
+            "preferences": ["fresh produce", "weekly deals", "curbside pickup"]
+        },
+        "offer": {
+            "type": "Discount",
+            "headline": "Fresh Savings, Just for You!",
+            "details": "15% off on fresh produce and dairy products",
+            "coupon_code": "holiday15",  
+            "valid_till": "2025-12-15"
+        },
+        "creative_guidelines": {
+            "tone": "Friendly, community-focused, and helpful",
+            "banned_phrases": ["limited stock", "exclusive access"],
+            "disclaimer": "Offers valid while supplies last. Prices may vary by store.",
+            "cta_examples": ["Shop Now", "Order Online", "Grab Your Discount"],
+            "subject_length_limit": 60
+        },
+        "channel": {"type": "Email", "target_platform": "Mailchimp", "ab_variants": true},
+        "success_metrics": {"kpi": ["open_rate", "click_rate"], "target_values": {"open_rate": 0.3, "click_rate": 0.1}}
+    },
+    "creative_guidelines": {
+        "brand": "HEB",
+        "tone": {
+          "primary": "Friendly, community-focused, and helpful",
+          "secondary": "Warm, approachable, and trustworthy",
+          "voice_characteristics": [
+            "Conversational but professional",
+            "Emphasizes community values",
+            "Focuses on customer benefits",
+            "Uses inclusive language"
+          ]
+        },
+        "banned_phrases": [
+          "limited stock",
+          "exclusive access",
+          "act now or lose out",
+          "once in a lifetime",
+          "urgent",
+          "last chance",
+          "limited time only",
+          "while supplies last",
+          "hurry up",
+          "don't miss out"
+        ],
+        "cta_rules": {
+          "preferred_ctas": [
+            "Shop Now",
+            "Order Online",
+            "Grab Your Discount",
+            "Browse Deals",
+            "Start Shopping",
+            "View Offers",
+            "Explore Products"
+          ],
+          "style": "Clear, action-oriented, friendly",
+          "avoid": ["Buy Now", "Click Here", "Act Now"]
+        },
+        "length_limits": {
+          "subject_line": {
+            "max_chars": 60,
+            "recommended_chars": 50,
+            "min_chars": 20
+          },
+          "email_body": {
+            "max_chars": 2000,
+            "recommended_chars": 500,
+            "min_chars": 100
+          },
+          "preheader": {
+            "max_chars": 100,
+            "recommended_chars": 80
+          }
+        },
+        "disclaimers": {
+          "default": "Offers valid while supplies last. Prices may vary by store.",
+          "discount": "Discount applies to eligible items only. Cannot be combined with other offers.",
+          "expiration": "Offer expires on {valid_till}. Terms and conditions apply.",
+          "store_specific": "Available at participating locations. Check your local store for availability."
+        },
+        "style_guidelines": {
+          "capitalization": {
+            "avoid_all_caps": true,
+            "max_caps_percentage": 10,
+            "preferred_case": "sentence case"
+          },
+          "punctuation": {
+            "avoid_excessive_exclamation": true,
+            "max_exclamation_marks": 1,
+            "preferred_ending": "period or no punctuation"
+          },
+          "formatting": {
+            "use_short_paragraphs": true,
+            "max_sentence_length": 25,
+            "prefer_bullet_points": true
+          }
+        },
+        "compliance_rules": {
+          "pii_handling": {
+            "never_include": ["ssn", "credit_card", "bank_account"],
+            "allowed": ["name", "email", "preferred_store"]
+          },
+          "spam_keywords": [
+            "free!!!",
+            "click here",
+            "act now",
+            "limited time",
+            "guaranteed",
+            "no risk",
+            "winner",
+            "congratulations"
+          ],
+          "required_elements": [
+            "unsubscribe_link",
+            "physical_address",
+            "company_name"
+          ]
+        },
+        "personalization_rules": {
+          "use_customer_name": true,
+          "use_preferred_store": true,
+          "reference_recent_activity": true,
+          "match_preferences": true,
+          "avoid_over_personalization": true
+        },
+        "governance_score_weights": {
+          "tone_compliance": 0.25,
+          "length_compliance": 0.20,
+          "safety_compliance": 0.30,
+          "brand_alignment": 0.15,
+          "personalization_quality": 0.10
+        }
+      }
+}

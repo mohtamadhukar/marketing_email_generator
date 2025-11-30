@@ -212,7 +212,7 @@ a chatbot interface will appear on the right.
 The conversation is initially blank. 
 
 Here is something to try: 
-* "Start creating email variants based on pre-loaded brief"
+* "Start creating the emails using pre-defined briefs and show them for approval or rejection"
 
 **Workflow:**
 1. The `_load_precreated_brief` callback loads the campaign brief from `data/initial_state.json` into session state
@@ -220,6 +220,17 @@ Here is something to try:
 3. Results (governed_email + safety_report) are presented for human approval
 4. If approved: `deploy_email_to_sfmc_tool` is called to deploy to Salesforce Marketing Cloud
 5. If rejected: `reject_email_tool` is called to handle rejection
+
+## Sample Agent interactions
+
+### Approval Workflow
+
+![Sample Approval Workflow Screenshot](docs/imgs/sample_approval_interaction.png)
+
+### Rejection Workflow
+![Sample Rejection Workflow Screenshot](docs/imgs/sample_rejection_example.png)
+
+
 
 ### Sample Campaign Brief Structure
 

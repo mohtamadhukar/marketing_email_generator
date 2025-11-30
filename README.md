@@ -81,6 +81,8 @@ The key features of the Marketing Email Generator include:
 
 The system architecture follows a sequential pipeline pattern, where specialized agents process email content through distinct stages:
 
+![Architecture Diagram](docs/imgs/email_content_agent_arch.png)
+
 **Architecture Flow:**
 
 1. **Root Agent** (`basic/agent.py`)

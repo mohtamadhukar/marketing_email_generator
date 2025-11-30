@@ -145,6 +145,27 @@ The system architecture follows a sequential pipeline pattern, where specialized
 
 ## Setup and Installation
 
+### Repository structure
+
+The codebase is organized into modular components:
+
+```
+personalized_email_generator/
+├── basic/
+│   ├── agent.py              # Root agent definition and orchestration
+│   ├── sub_agents.py         # Sequential agent pipeline (Copy, Brand, Safety, Packaging)
+│   ├── tools.py              # Function tools (brand_check, safety_check, SFMC deployment)
+│   └── memory.py             # Session state management and callbacks
+├── data/
+│   ├── initial_state.json    # Campaign brief and creative guidelines
+│   ├── profiles.json         # Customer profile data
+│   └── events.json           # Customer event history
+├── docs/
+│   └── capstone_todo.md      # Project planning and requirements
+├── requirements.txt          # Python dependencies
+└── README.md                 # This file
+```
+
 ### Prerequisites
 
 *   Python 3.9 or higher
@@ -168,19 +189,9 @@ The system architecture follows a sequential pipeline pattern, where specialized
    Create a `.env` file in the project root:
    ```bash
    DATA_ROOT_FOLDER=./data
+   GOOGLE_GENAI_USE_VERTEXAI=FALSE 
+   GOOGLE_API_KEY=<Your API key> 
    ```
-   
-   Alternatively, set the environment variable:
-   ```bash
-   export DATA_ROOT_FOLDER=./data
-   ```
-
-4. **Configure Google Cloud credentials:**
-   ```bash
-   gcloud auth application-default login
-   ```
-   
-   Or set the `GOOGLE_APPLICATION_CREDENTIALS` environment variable to point to your service account key file.
 
 5. **Prepare campaign data:**
    - Ensure `data/initial_state.json` contains your campaign brief (see sample structure below)
@@ -188,22 +199,20 @@ The system architecture follows a sequential pipeline pattern, where specialized
 
 ### Running the Agent
 
-The agent can be run using ADK's runner framework. Example usage:
+The agent can be run using ADK's web UI. Example usage:
 
-```python
-from google.adk.sessions import InMemorySessionService
-from basic.agent import root_agent
-
-# Create a session
-session_service = InMemorySessionService()
-session = session_service.create_session()
-
-# Run the agent
-response = root_agent.run(
-    "Generate an email campaign",
-    session=session
-)
+```bash
+# Under the root directory:
+adk web
 ```
+
+This will start a local web server on your machine. You may open the URL, select "basic" in the top-left drop-down menu, and
+a chatbot interface will appear on the right. 
+
+The conversation is initially blank. 
+
+Here is something to try: 
+* "Start creating email variants based on pre-loaded brief"
 
 **Workflow:**
 1. The `_load_precreated_brief` callback loads the campaign brief from `data/initial_state.json` into session state
@@ -247,80 +256,6 @@ The system expects a campaign brief with the following structure:
   }
 }
 ```
-
-## Project Journey
-
-### Development Approach
-
-This project was developed following a structured approach:
-
-1. **Problem Analysis**: Identified key pain points in email marketing workflows (manual content creation, brand consistency, compliance risks)
-
-2. **Architecture Design**: Designed a multi-agent system with clear separation of concerns:
-   - Content generation (Copy Agent)
-   - Brand governance (Brand Agent)
-   - Safety compliance (Safety Agent)
-   - Output packaging (Packaging Agent)
-
-3. **Implementation Phases**:
-   - **Phase 1**: Core agent structure with SequentialAgent pipeline
-   - **Phase 2**: Function tools for deterministic operations (brand checks, safety validation)
-   - **Phase 3**: Session state management for data flow between agents
-   - **Phase 4**: Human-in-the-loop approval workflow
-   - **Phase 5**: Error handling and retry logic
-
-4. **Key Design Decisions**:
-   - Used `SequentialAgent` to ensure proper ordering and state passing
-   - Implemented function tools for deterministic brand/safety checks (faster, more reliable than LLM-based)
-   - Leveraged ADK's session state for seamless agent-to-agent communication
-   - Added callback mechanism (`_load_precreated_brief`) for initial state injection
-
-### Code Organization
-
-The codebase is organized into modular components:
-
-```
-personalized_email_generator/
-├── basic/
-│   ├── agent.py              # Root agent definition and orchestration
-│   ├── sub_agents.py         # Sequential agent pipeline (Copy, Brand, Safety, Packaging)
-│   ├── tools.py              # Function tools (brand_check, safety_check, SFMC deployment)
-│   └── memory.py             # Session state management and callbacks
-├── data/
-│   ├── initial_state.json    # Campaign brief and creative guidelines
-│   ├── profiles.json         # Customer profile data
-│   └── events.json           # Customer event history
-├── docs/
-│   └── capstone_todo.md      # Project planning and requirements
-├── requirements.txt          # Python dependencies
-└── README.md                 # This file
-```
-
-**Code Comments and Documentation:**
-All code files include comprehensive comments explaining:
-*   Agent responsibilities, behaviors, and expected inputs/outputs
-*   Tool implementations, their purpose, and usage patterns
-*   State management patterns and data flow between agents
-*   Design decisions, trade-offs, and architectural choices
-*   Function parameters, return values, and error handling
-
-This documentation ensures maintainability and helps reviewers understand the implementation approach.
-
-## Key Features
-
-*   **Multi-Agent Orchestration**: Sequential agent pipeline ensures proper workflow execution with data passing between stages
-*   **Brand Governance**: Automated enforcement of brand rules, tone guidelines, and style constraints
-*   **Safety Compliance**: Built-in spam and PII detection to ensure email deliverability and compliance
-*   **Human-in-the-Loop**: Approval workflow allows marketers to review and approve content before deployment
-*   **Session State Management**: Efficient state management using ADK's session state for data flow between agents
-*   **Retry Logic**: Configurable HTTP retry options for robust API interactions with exponential backoff
-
-## Limitations
-
-*   Safety checks use naive heuristics and may not catch all compliance issues
-*   SFMC deployment is currently mocked and requires integration with actual SFMC API
-*   Brand governance rules are applied via function tools rather than LLM-based evaluation
-*   The system processes one campaign brief at a time (no batch processing)
 
 ## Potential Enhancements
 

@@ -223,6 +223,29 @@ Here is something to try:
 4. If approved: `deploy_email_to_sfmc_tool` is called to deploy to Salesforce Marketing Cloud
 5. If rejected: `reject_email_tool` is called to handle rejection
 
+## Deployment to Vertex AI Agent Engine
+
+This agent can be deployed to Vertex AI Agent Engine for production use. See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed deployment instructions.
+
+### Quick Start Deployment
+
+1. **Prerequisites:**
+   - Google Cloud Project with billing enabled
+   - Vertex AI API enabled
+   - Authenticated gcloud CLI (`gcloud auth application-default login`)
+
+2. **Deploy:**
+   ```bash
+   python deploy.py --project-id YOUR_PROJECT_ID --region us-central1
+   ```
+
+3. **Test:**
+   ```bash
+   python deploy.py --project-id YOUR_PROJECT_ID --test
+   ```
+
+For complete deployment instructions, troubleshooting, and production considerations, see [DEPLOYMENT.md](DEPLOYMENT.md).
+
 ## Sample Agent interactions
 
 ### Approval Workflow

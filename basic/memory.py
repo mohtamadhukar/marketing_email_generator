@@ -33,7 +33,9 @@ load_dotenv()
 # Path to the initial state JSON file containing campaign brief and creative guidelines
 # Implementation: Constructs path using DATA_ROOT_FOLDER environment variable
 # This enables flexible deployment across different environments (dev, staging, prod)
-SAMPLE_SCENARIO_PATH = f"{os.getenv("DATA_ROOT_FOLDER")}/initial_state.json"
+# Falls back to ./data if environment variable is not set
+DATA_ROOT = os.getenv("DATA_ROOT_FOLDER", "./data")
+SAMPLE_SCENARIO_PATH = os.path.join(DATA_ROOT, "initial_state.json")
 
 def _set_initial_states(source: Dict[str, Any], target: State | dict[str, Any]):
     """
